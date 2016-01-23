@@ -2,7 +2,7 @@
 <p>Number of ratings: <%= @ratings.count %> </p>
 
 <ul>
- <% @ratings.each do |rating| %>
-   <li> <%= rating %> </li>
+ <% @ratings.each do |rating|%>
+   <li> <%= @beers.find_by(id:rating.beer_id).name %> <%= rating.to_s %> </li>
  <% end %>
 </ul>
