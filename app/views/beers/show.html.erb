@@ -18,7 +18,7 @@
 <% if @beer.ratings.empty? %>
  <p> Beer has not yet been rated! </p>
 <% else %>
- <p>Average rating: <%=@beer.average_rating %> (<%=@beer.ratings.length%> ratings)</p>
+ <p>Average rating: <%=@beer.average_rating %> (<%= pluralize(@beer.ratings.length, 'rating') %>)</p>
 <% end %>
 
 <%= link_to 'Breweries', breweries_path %> |
