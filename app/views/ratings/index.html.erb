@@ -6,3 +6,5 @@
    <li> <%= @beers.find_by(id:rating.beer_id).name %> <%= rating.to_s %> </li>
  <% end %>
 </ul>
+
+<p><%=link_to 'New rating', ratings_new_path %></p>
