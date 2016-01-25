@@ -8,7 +8,10 @@ class Beer < ActiveRecord::Base
     #Keskiarvo:
     #Vanha: @ratings.where(beer_id:self.id).inject(0){|sum, item| sum + item.score}.to_f / @ratings.where(beer_id:self.id).length
     @ratings.where(beer_id:self.id).average(:score).to_f
+  end
 
+  def to_s
+    "#{self.name} by #{Brewery.find_by(id:self.brewery_id).name}"
   end
 
 end
