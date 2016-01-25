@@ -3,8 +3,8 @@
 
 <ul>
  <% @ratings.each do |rating|%>
-   <li> <%= @beers.find_by(id:rating.beer_id).name %> <%= rating.to_s %> </li>
+   <li> <%= @beers.find_by(id:rating.beer_id).name %> <%= rating.to_s %> <%= link_to 'Delete', rating_path(rating.id), method: :delete, data: { confirm: 'Delete rating?' }%></li>
  <% end %>
 </ul>
 
-<p><%=link_to 'New rating', ratings_new_path %></p>
+<p><%=link_to 'New rating', new_rating_path %></p>
