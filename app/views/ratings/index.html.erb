@@ -3,7 +3,7 @@
 
 <ul>
  <% @ratings.each do |rating|%>
-   <li> <%= @beers.find_by(id:rating.beer_id).name %> <%= rating.to_s %> <%= link_to 'Delete', rating_path(rating.id), method: :delete, data: { confirm: 'Delete rating?' }%></li>
+   <li> <%= @beers.find_by(id:rating.beer_id).name %> <%= rating.to_s %> <%= link_to User.find_by(id:rating.user_id).username, user_path(User.find_by(id:rating.user_id))%></li>
  <% end %>
 </ul>
 

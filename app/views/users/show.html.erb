@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Username:</strong>
+  <%= @user.username %>
+</p>
+
+<% if @user.ratings.count == 0 %>
+<p> No ratings yet! </p>
+<% else %>
+<p> <%= @user.ratings.count %> ratings in the database (average <%= @user.average_rating %>). </p>
+<% end %>
+
+<ul>
+  <% @user.ratings.each do |rating| %>
+  <li><%=Beer.find_by(id: rating.beer_id).name%> <%= rating.score %> <%= link_to 'Delete', rating_path(rating.id), method: :delete, data: { confirm: 'Delete rating?' } %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
