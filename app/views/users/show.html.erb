@@ -22,9 +22,17 @@
 
 <ul>
   <% @user.ratings.each do |rating| %>
-  <li><%=Beer.find_by(id: rating.beer_id).name%> <%= rating.score %> <%= link_to 'Delete', rating_path(rating.id), method: :delete, data: { confirm: 'Delete rating?' } %></li>
+  <li>  <%=Beer.find_by(id: rating.beer_id).name%>
+        <%= rating.score %>
+        <% if @user == current_user %>
+              <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+  </li>
   <% end %>
 </ul>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
+<% if @user == current_user %>
+  <%= link_to 'Edit', edit_user_path(@user) %> |
+  <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<% end %>
 <%= link_to 'Back', users_path %>
