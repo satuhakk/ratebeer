@@ -11,6 +11,7 @@
     </div>
   <% end %>
 
+  <% if @user.new_record? %>
   <div class="field">
     <%= f.label :username %><br>
     <%= f.text_field :username %>
@@ -23,6 +24,17 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation  %>
   </div>
+  <% end %>
+  <% unless @user.new_record? %>
+  <div class="field">
+    <%= f.label :new_password %><br />
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation  %>
+  </div>
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>
