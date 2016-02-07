@@ -6,7 +6,9 @@
 </p>
 
 <p>
-  <strong>Memberships:</strong>
+  <% unless @user.memberships.count == 0 %>
+    <strong>Memberships:</strong>
+  <% end %>
   <ul>
    <% @user.beer_clubs.each do |club|%>
      <li> <%= club.name %> </li>
