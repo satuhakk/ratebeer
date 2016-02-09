@@ -20,7 +20,7 @@ FactoryGirl.define do
 
   factory :beer do
     name "Hardcore IPA"
-    brewery
+    brewery 
     style "IPA"
   end
 end

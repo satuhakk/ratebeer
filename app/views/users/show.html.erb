@@ -18,6 +18,7 @@
 
   <% unless @user.ratings.count == 0 %>
     <p> <strong> Favorite beer style: </strong> <%= @user.favorite_style %></p>
+    <p> <strong> Favorite brewery: </strong> <%= @user.favorite_brewery %></p>
   <% end %>
 
 <% if @user.ratings.count == 0 %>

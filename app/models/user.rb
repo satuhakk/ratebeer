@@ -23,4 +23,9 @@ class User < ActiveRecord::Base
     self.beers.group(:style).average(:score).sort_by{|key, value| value}.last[0]
   end
 
+  def favorite_brewery
+    return nil if ratings.empty?
+    Brewery.find_by(id:(self.beers.group(:brewery_id).average(:score).sort_by{|key, value| value}.last[0])).name
+  end
+
 end
