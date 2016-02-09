@@ -15,7 +15,6 @@ describe 'User page' do
     visit user_path(user2)
     expect(page).to have_content "#{beer2.name}"
     expect(page).to have_no_content "#{beer1.name}"
-    save_and_open_page
   end
 
   it "shows users favorite beer style" do

@@ -7,7 +7,6 @@ describe "Rating" do
   let!(:beer1) { FactoryGirl.create :beer, name:"iso 3", brewery:brewery }
   let!(:beer2) { FactoryGirl.create :beer, name:"Karhu", brewery:brewery }
   let!(:user) { FactoryGirl.create :user }
-  let!(:rating) { FactoryGirl.create :rating, beer:beer2}
 
   before :each do
     sign_in(username:"Pekka", password:"Foobar1")

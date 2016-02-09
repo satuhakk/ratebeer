@@ -1,3 +1,5 @@
 == README
 
 Sovellus Herokussa: https://damp-meadow-72902.herokuapp.com/beers
+
+[![Build Status](https://travis-ci.org/satuhakk/ratebeer.png)](https://travis-ci.org/satuhakk/ratebeer)

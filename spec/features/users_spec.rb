@@ -25,6 +25,7 @@ describe "User" do
       beer = FactoryGirl.create(:beer)
       FactoryGirl.create :rating, beer:beer, user:user
       expect(user.ratings.count).to eq(1)
+      
       visit user_path(user)
       click_link('delete')
       expect(user.ratings.count).to eq(0)
