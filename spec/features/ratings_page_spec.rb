@@ -15,5 +15,5 @@ describe "Ratings page" do
       expect(page).to have_content r.beer.name
     end
   end
-  
+
 end
