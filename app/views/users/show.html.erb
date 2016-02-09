@@ -7,7 +7,7 @@
 
 <p>
   <% unless @user.memberships.count == 0 %>
-    <strong>Memberships:</strong>
+    <strong> Memberships: </strong>
   <% end %>
   <ul>
    <% @user.beer_clubs.each do |club|%>
@@ -15,6 +15,10 @@
    <% end %>
   </ul>
 </p>
+
+  <% unless @user.ratings.count == 0 %>
+    <p> <strong> Favorite beer style: </strong> <%= @user.favorite_style %></p>
+  <% end %>
 
 <% if @user.ratings.count == 0 %>
 <p> No ratings yet! </p>
