@@ -1,4 +1,6 @@
 class PlacesController < ApplicationController
+  before_action :set_place, only: [:show]
+
   def index
   end
 
@@ -9,5 +11,12 @@ class PlacesController < ApplicationController
     else
       render :index
     end
+  end
+
+  def show
+  end
+
+  def set_place
+    @place = BeermappingApi.places_in(params[:city]).detect{|p| p.id == params[:id]}
   end
 end
