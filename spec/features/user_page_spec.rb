@@ -20,7 +20,7 @@ describe 'User page' do
   it "shows users favorite beer style" do
     sign_in(username:"Pekka", password:"Foobar1")
     visit user_path(user2)
-    expect(page).to have_content "#{user2.favorite_style}"
+    expect(page).to have_content "#{user2.favorite_style.name}"
   end
 
   it "shows users favorite brewery" do

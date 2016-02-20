@@ -1,0 +1,3 @@
+#!/bin/sh
+export APIKEY="d40ba50221a4051f7c445cd15ac84736";
+rspec spec
