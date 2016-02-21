@@ -32,7 +32,7 @@
   <li>  <%=Beer.find_by(id: rating.beer_id).name%>
         <%= rating.score %>
         <% if @user == current_user %>
-              <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %>
+              <span class="label label-danger"> <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %> </span>
         <% end %>
   </li>
   <% end %>
