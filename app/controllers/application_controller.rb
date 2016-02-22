@@ -15,4 +15,8 @@ class ApplicationController < ActionController::Base
   def ensure_that_signed_in
     redirect_to signin_path, notice:'You need to sign in first!' if current_user.nil?
   end
+
+  def ensure_that_admin
+    redirect_to signin_path, notice:'You need to be an admin to do that!' if current_user.admin.nil?
+  end
 end
