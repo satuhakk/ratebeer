@@ -6,7 +6,7 @@
     <h4> Best beers </h4>
     <ul>
       <% @beers_top3.each do |beer| %>
-      <li> <strong> <%= beer.name %> </strong> by <%= beer.brewery.name %> (avg <%= beer.average_rating%>)</li>
+      <li> <strong> <%= beer.name %> </strong> by <%= beer.brewery.name %> (avg <%= round(beer.average_rating)%>)</li>
       <% end %>
     </ul>
   </div>

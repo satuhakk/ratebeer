@@ -1,5 +1,5 @@
 <ul>
   <% top3.each do |i| %>
-  <li> <strong><%= i.name %></strong> (avg <%= i.average_rating %>)</li>
+  <li> <strong><%= i.name %></strong> (avg <%= round(i.average_rating) %>)</li>
   <% end %>
 </ul>
