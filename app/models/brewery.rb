@@ -6,6 +6,9 @@ class Brewery < ActiveRecord::Base
                                     only_integer: true }
   validate :year_is_current_or_less
 
+  scope :active, -> { where active:true }
+  scope :retired, -> { where active:[nil,false] }
+
   has_many :beers, dependent: :destroy
   has_many :ratings, through: :beers
 
@@ -24,5 +27,9 @@ class Brewery < ActiveRecord::Base
     if self.year > Time.now.year
       errors.add(:year, "can't be in the future")
     end
+  end
+
+  def self.top(n)
+     Brewery.all.sort_by{ |b| -(b.average_rating||0) }.first(n)
   end
 end

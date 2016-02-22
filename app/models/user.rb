@@ -28,4 +28,8 @@ class User < ActiveRecord::Base
     Brewery.find_by(id:(self.beers.group(:brewery_id).average(:score).sort_by{|key, value| value}.last[0])).name
   end
 
+  def self.most_ratings(n)
+    User.all.sort_by{|u| -u.ratings.count}.first(n)
+  end
+
 end

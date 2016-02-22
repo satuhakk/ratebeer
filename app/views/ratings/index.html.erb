@@ -1,10 +1,45 @@
-<h2>List of ratings</h2>
-<p>Number of ratings: <%= @ratings.count %> </p>
+<h2>Rating statistics</h2>
+<p>Number of ratings in database: <%= @ratings.count %> </p>
 
-<ul>
- <% @ratings.each do |rating|%>
-   <li> <%= @beers.find_by(id:rating.beer_id).name %> <%= rating.to_s %> <%= link_to User.find_by(id:rating.user_id).username, user_path(User.find_by(id:rating.user_id))%></li>
- <% end %>
-</ul>
+<div class="row">
+  <div class="col-md-4">
+    <h4> Best beers </h4>
+    <ul>
+      <% @beers_top3.each do |beer| %>
+      <li> <strong> <%= beer.name %> </strong> by <%= beer.brewery.name %> (avg <%= beer.average_rating%>)</li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="col-md-4">
+    <h4> Best breweries </h4>
+    <%= render 'top', top3: @breweries_top3 %>
+  </div>
+
+  <div class="col-md-4">
+    <h4> Best  styles </h4>
+    <%= render 'top', top3: @styles_top3 %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <h4> Most recent ratings </h4>
+    <ul>
+      <% @ratings_recent.each do |rating| %>
+      <li> <strong> <%= rating.beer.name %> </strong>, <%= rating.score %> points <i> by <%= rating.user.username %> </i></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="col-md-4">
+    <h4> Most active users </h4>
+    <ul>
+      <% @users_top3.each do |user| %>
+      <li> <strong><%= user.username %></strong>, <%= user.ratings.count %> ratings</li>
+      <% end %>
+    </ul>
+  </div>
+</div>
 
 <p><%=link_to 'New rating', new_rating_path %></p>
