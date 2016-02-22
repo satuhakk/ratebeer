@@ -1,5 +1,11 @@
 class User < ActiveRecord::Base
   include RatingAverage
+  
+  before_save do
+    if self.active == nil
+      self.active = true
+    end
+  end
 
   has_secure_password
 

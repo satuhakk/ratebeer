@@ -1,45 +1,48 @@
-<p id="notice"><%= notice %></p>
+  <p>
+    <strong>Username:</strong>
+    <%= @user.username %>
+  </p>
 
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
+  <p>
+    <% unless @user.memberships.count == 0 %>
+      <strong> Memberships: </strong>
+    <% end %>
+    <ul>
+     <% @user.beer_clubs.each do |club|%>
+       <li> <%= club.name %> </li>
+     <% end %>
+    </ul>
+  </p>
 
-<p>
-  <% unless @user.memberships.count == 0 %>
-    <strong> Memberships: </strong>
+    <% unless @user.ratings.count == 0 %>
+      <p> <strong> Favorite beer style: </strong> <%= @user.favorite_style.name %></p>
+      <p> <strong> Favorite brewery: </strong> <%= @user.favorite_brewery %></p>
+    <% end %>
+
+  <% if @user.ratings.count == 0 %>
+  <p> No ratings yet! </p>
+  <% else %>
+  <p> <%= @user.ratings.count %> ratings in the database (average <%= @user.average_rating %>). </p>
   <% end %>
+
   <ul>
-   <% @user.beer_clubs.each do |club|%>
-     <li> <%= club.name %> </li>
-   <% end %>
+    <% @user.ratings.each do |rating| %>
+    <li>  <%=Beer.find_by(id: rating.beer_id).name%>
+          <%= rating.score %>
+          <% if @user == current_user %>
+                <span class="label label-danger"> <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %> </span>
+          <% end %>
+    </li>
+    <% end %>
   </ul>
-</p>
 
-  <% unless @user.ratings.count == 0 %>
-    <p> <strong> Favorite beer style: </strong> <%= @user.favorite_style.name %></p>
-    <p> <strong> Favorite brewery: </strong> <%= @user.favorite_brewery %></p>
+  <% if @user == current_user %>
+    <%= link_to 'Edit', edit_user_path(@user) %> |
+    <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
+  <% elsif current_user && current_user.admin == true && @user.active == true %>
+    <%= link_to 'Freeze account', toggle_activity_user_path(@user.id), method: :post, class: "btn btn-danger"%>
+  <% elsif current_user && current_user.admin == true && @user.active == false %>
+    <%= link_to 'Activate account', toggle_activity_user_path(@user.id), method: :post, class: "btn btn-warning"%>
   <% end %>
-
-<% if @user.ratings.count == 0 %>
-<p> No ratings yet! </p>
-<% else %>
-<p> <%= @user.ratings.count %> ratings in the database (average <%= @user.average_rating %>). </p>
-<% end %>
-
-<ul>
-  <% @user.ratings.each do |rating| %>
-  <li>  <%=Beer.find_by(id: rating.beer_id).name%>
-        <%= rating.score %>
-        <% if @user == current_user %>
-              <span class="label label-danger"> <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %> </span>
-        <% end %>
-  </li>
-  <% end %>
-</ul>
-
-<% if @user == current_user %>
-  <%= link_to 'Edit', edit_user_path(@user) %> |
-  <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
-<% end %>
-<%= link_to 'Back', users_path %>
+  <br>
+  <%= link_to 'Back', users_path %>
