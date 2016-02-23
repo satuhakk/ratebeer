@@ -9,12 +9,9 @@ describe "Ratings page" do
   let!(:user) { FactoryGirl.create :user }
   let!(:rating) { FactoryGirl.create :rating, beer:beer1, user:user}
 
-  it "should list existing ratings and their total number" do
+  it "should show the total number of ratings" do
     visit ratings_path
-    expect(page).to have_content "Number of ratings: #{Rating.all.count}"
-    Rating.all.each do |r|
-      expect(page).to have_content r.beer.name
-    end
+    expect(page).to have_content "Number of ratings in database: #{Rating.all.count}"
   end
 
 end

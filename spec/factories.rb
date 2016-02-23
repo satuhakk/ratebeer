@@ -16,6 +16,7 @@ FactoryGirl.define do
   factory :brewery do
     name "Sinebrychoff"
     year 1819
+    active true
   end
 
   factory :beer do
