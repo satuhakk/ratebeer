@@ -32,4 +32,11 @@ class Brewery < ActiveRecord::Base
   def self.top(n)
      Brewery.all.sort_by{ |b| -(b.average_rating||0) }.first(n)
   end
+
+  # def self.sarakesort(var, session_var)
+  #   att = var.gsub!(/\A"|"\Z/, '')
+  #   case session_var when var then self.sort_by{ |i| i.att }
+  #   end
+  # end
+
 end

@@ -3,12 +3,49 @@ class BreweriesController < ApplicationController
   before_action :ensure_that_signed_in, except: [:index, :show]
   before_action :ensure_that_admin, only: [:destroy]
 
+
+
   # GET /breweries
   # GET /breweries.json
   def index
     @breweries = Brewery.all
     @active_breweries = Brewery.active
     @retired_breweries = Brewery.retired
+
+    order = params[:order] || 'name'
+
+    @active_breweries = case order
+    when 'name' then list_order('name')
+    when 'year' then list_order('year')
+    end
+
+  # when 'name' then @active_breweries.sort_by{ |b| b.name; session[:sort_var] = true }
+  # when 'name' && session[:sort_var] then @active_breweries.sort_by{ |b| b.name.reverse; session[:sort_var] = false }
+  # when 'year' then @active_breweries.sort_by{ |b| b.year }
+    # @retired_breweries = case order
+    # when 'name' then @retired_breweries.sort_by{ |b| b.name }
+    # when 'year' then @retired_breweries.sort_by{ |b| b.year }
+    # end
+  end
+
+  def list_order(var)
+    if session[:sort_var] == var
+      if var == 'name'
+        session[:sort_var] = false
+        @active_breweries.sort_by{ |b| b.name}.reverse
+      else
+        session[:sort_var] = false
+        @active_breweries.sort_by{ |b| b.year}.reverse
+      end
+   else
+     if var == 'name'
+       session[:sort_var] = 'name'
+       @active_breweries.sort_by{ |b| b.name}
+     else
+       session[:sort_var] = 'year'
+       @active_breweries.sort_by{ |b| b.year}
+     end
+   end
   end
 
   # GET /breweries/1
@@ -72,6 +109,20 @@ class BreweriesController < ApplicationController
     new_status = brewery.active? ? "active" : "retired"
 
     redirect_to :back, notice:"brewery activity status changed to #{new_status}"
+  end
+
+  # Sarakkeiden sorttausta? Ei toimi koska var on hipsuissa
+  # def saatana(list, var)
+  #   if session[:sort_attr] && session[:sort_attr] = var
+  #     list.sort_by{ |i| i.var.reverse }
+  #   else
+  #     list.sort_by{ |i| i.var }
+  #   end
+  # end
+
+  def sarakesort(var)
+    case order when var then self.sort_by{ |i| i.var }
+    end
   end
 
   # HUOM: älä kirjoita private-määrettä tiedostoon ennen kontrollerimetodeja (index, new, ...)
