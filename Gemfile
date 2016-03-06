@@ -31,6 +31,7 @@ gem 'simplecov', require: false
 gem 'httparty'
 gem 'bootstrap-sass'
 gem 'jquery-turbolinks'
+gem 'rack-mini-profiler'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
