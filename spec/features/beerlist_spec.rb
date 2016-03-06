@@ -38,9 +38,24 @@ describe "beerlist page" do
 
   it "lists beers in alphabetical order", :js => true do
     visit beerlist_path
-    find('table').find('tr:nth-child(2)')
-    save_and_open_page
+    find('table').find('tr:nth-child(3)')
     expect(page.all('tr')[1].text).to have_content "Fastenbier"
     expect(page.all('tr')[2].text).to have_content "Lechte Weisse"
+  end
+
+  it "lists beers in style order when style is clicked", :js => true do
+    visit beerlist_path
+    find('table').find('tr:nth-child(3)')
+    click_link('style')
+    expect(page.all('tr')[1].text).to have_content "Lager"
+    expect(page.all('tr')[2].text).to have_content "Rauchbier"
+  end
+
+  it "lists beers in brewery order when brewery is clicked", :js => true do
+    visit beerlist_path
+    find('table').find('tr:nth-child(3)')
+    click_link('brewery')
+    expect(page.all('tr')[1].text).to have_content "Ayinger"
+    expect(page.all('tr')[2].text).to have_content "Koff"
   end
 end
