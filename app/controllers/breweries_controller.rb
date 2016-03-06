@@ -28,6 +28,10 @@ class BreweriesController < ApplicationController
     # end
   end
 
+  def nglist
+
+  end
+
   def list_order(var)
     if session[:sort_var] == var
       if var == 'name'

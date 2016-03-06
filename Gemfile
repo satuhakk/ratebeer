@@ -30,6 +30,7 @@ gem 'simplecov', require: false
 
 gem 'httparty'
 gem 'bootstrap-sass'
+gem 'jquery-turbolinks'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
