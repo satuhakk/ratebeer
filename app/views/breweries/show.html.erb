@@ -1,8 +1,9 @@
-<p id="notice"><%= notice %></p>
+<% cache @brewery do %>
 
-<h2><%= @brewery.name %>
-<% if not @brewery.active  %>
-      <span class="label label-info">retired</span>
+<h2>
+  <%= @brewery.name %>
+  <% if not @brewery.active  %>
+    <span class="label label-info">retired</span>
   <% end %>
 </h2>
 
@@ -18,10 +19,12 @@
 <% end %>
 
 <p>
- <% @brewery.beers.each do |beer| %>
-   <%= link_to beer.name, beer %>
- <% end %>
+  <% @brewery.beers.each do |beer| %>
+  <%= link_to beer.name, beer %>
+  <% end %>
 </p>
+
+<% end %>
 
 <%= link_to "Change activity", toggle_activity_brewery_path(@brewery.id), method: :post, class: "btn btn-primary" %>
 <br> <br>
