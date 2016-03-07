@@ -1,4 +1,7 @@
 <h2>Rating statistics</h2>
+
+<% cache "ratings-stats", expires_in:10.minutes do %>
+
 <p>Number of ratings in database: <%= @ratings.count %> </p>
 
 <div class="row">
@@ -41,5 +44,7 @@
     </ul>
   </div>
 </div>
+
+<% end %>
 
 <p><%=link_to 'New rating', new_rating_path %></p>

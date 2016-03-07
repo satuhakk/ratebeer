@@ -1,14 +1,18 @@
 class RatingsController < ApplicationController
+  before_action :skip_if_cached, only: [:index]
+
+  def skip_if_cached
+    return render :index if fragment_exist?( "ratings-stats"  )
+  end
 
   def index
     @ratings = Rating.all
     @beers = Beer.all
-    # tässä renderöidään oletuksena näkymätemplate /app/views/ratings/index.html
-    @beers_top3 = Beer.top 3
-    @breweries_top3 = Brewery.top 3
-    @styles_top3 = Style.top 3
+    @beers_top3 = Beer.top(3)
+    @breweries_top3 = Brewery.top(3)
+    @styles_top3 = Style.top(3)
     @ratings_recent = Rating.recent
-    @users_top3 = User.most_ratings 3
+    @users_top3 = User.most_ratings(3)
   end
 
   def new
