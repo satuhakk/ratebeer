@@ -3,3 +3,5 @@ Sovellus Herokussa: https://damp-meadow-72902.herokuapp.com/beers
 {<img src="https://travis-ci.org/satuhakk/ratebeer.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/satuhakk/ratebeer]
 
 {<img src="https://codeclimate.com/github/satuhakk/ratebeer/badges/gpa.svg" />}[https://codeclimate.com/github/satuhakk/ratebeer]
+
+
